@@ -17,22 +17,30 @@
 package org.mz.docgen.service;
 
 /**
- *
+ * This class is used to take the user input and according to the input 
+ * its method calls method of another class to generate specific document.
  * @author Payal
  */
 public final class DocGeneratorFactory {
 
     public static final int PDF = 0;
     public static final int WORD = 1;
+    private static final PdfDocumentGenerator PDF_DOCUMENT_GENERATOR = new PdfDocumentGenerator();
+    private static final WordDocumentGenerator WORD_DOCUMENT_GENERATOR = new WordDocumentGenerator();
     
     private DocGeneratorFactory(){}
-
+    /**This method checks the user input to generate output file based on the
+     * value of parameter.
+     * @param DOCTYPE
+     * @return DocumentGenerator implementor class
+     * 
+     */
     public static DocumentGenerator getGenerator(int DOCTYPE) {
         switch (DOCTYPE) {
             case PDF:
-                return new PdfDocumentGenerator();
+                return PDF_DOCUMENT_GENERATOR;
             case WORD:
-                return new WordDocumentGenerator();
+                return WORD_DOCUMENT_GENERATOR;
             default:
                 return null;
         }

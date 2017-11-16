@@ -17,29 +17,21 @@
 package org.mz.docgen.gui;
 
 import java.awt.Image;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 /**
- *
+ * AboutFrame class opens the About Frame when user clicks on "About".
  * @author hemchander
  */
 public class AboutFrame extends javax.swing.JFrame {
-
-    /**
-     * Creates new form AboutFrame
-     */
+     
     public AboutFrame() {
         initComponents();
     }
-
-      
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -60,13 +52,11 @@ public class AboutFrame extends javax.swing.JFrame {
         setResizable(false);
 
         try{
-
-            //java.io.InputStream is = this.getClass().getClassLoader().getResourceAsStream("my.properties");
-            java.util.Properties p = new Properties();
-            p.load(this.getClass().getClassLoader().getResourceAsStream("my.properties"));
-            String name = p.getProperty("name");
-            String version = p.getProperty("version");
-            aboutDocGenTextLbl1.setText("<html><b>"+name+"v"+version+"</b><br><br>"
+            java.util.Properties properties = new Properties();
+            properties.load(this.getClass().getClassLoader().getResourceAsStream("project.properties"));
+            String projectName = properties.getProperty("name");
+            String version = properties.getProperty("version");
+            aboutDocGenTextLbl1.setText("<html><b>"+projectName+" v"+version+"</b><br><br>"
                 + "DocGen is a Word/PDF generating application."
                 + "<br>Specifically designed for generating PDF and "
                 + "<br>Doc Files from images."

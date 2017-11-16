@@ -26,13 +26,18 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.mz.docgen.constant.Constant;
 
 /**
- *
+ * This class generates the docx file from selected file.
  * @author Payal
  */
 public class WordDocumentGenerator implements DocumentGenerator {
 
     private static final Logger LOGGER = LogManager.getLogger(WordDocumentGenerator.class.getName());
-
+    /**
+     * This method generates docx file of a single document.
+     * @param files
+     * @param destination
+     * @return result
+     */
     @Override
     public int generateSingleDocument(File[] files, File destination) {
         FileOutputStream fos = null;
@@ -63,7 +68,12 @@ public class WordDocumentGenerator implements DocumentGenerator {
         }
         return 0;
     }
-
+    /**
+     * This method generates docx file of multiple document.
+     * @param files
+     * @param destinationFilePath
+     * @return result
+     */
     @Override
     public int generateMultipleDocument(File[] files, File destinationFilePath) {
         int result = 1;

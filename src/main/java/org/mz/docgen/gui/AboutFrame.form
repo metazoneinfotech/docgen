@@ -57,8 +57,8 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="aboutDocGenTextLbl1">
       <Properties>
-        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" preCode="try{&#xa;&#xa;//java.io.InputStream is = this.getClass().getClassLoader().getResourceAsStream(&quot;my.properties&quot;);&#xa;java.util.Properties p = new Properties();&#xa;p.load(this.getClass().getClassLoader().getResourceAsStream(&quot;my.properties&quot;));&#xa;String name = p.getProperty(&quot;name&quot;);&#xa;String version = p.getProperty(&quot;version&quot;);" postCode="}catch(Exception e){&#xa;e.printStackTrace();&#xa;}">
-          <Connection code="&quot;&lt;html&gt;&lt;b&gt;&quot;+name+&quot;v&quot;+version+&quot;&lt;/b&gt;&lt;br&gt;&lt;br&gt;&quot;&#xa;    + &quot;DocGen is a Word/PDF generating application.&quot;&#xa;    + &quot;&lt;br&gt;Specifically designed for generating PDF and &quot;&#xa;    + &quot;&lt;br&gt;Doc Files from images.&quot;&#xa;    " type="code"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor" preCode="try{&#xa;java.util.Properties properties = new Properties();&#xa;properties.load(this.getClass().getClassLoader().getResourceAsStream(&quot;project.properties&quot;));&#xa;String projectName = properties.getProperty(&quot;name&quot;);&#xa;String version = properties.getProperty(&quot;version&quot;);" postCode="}catch(Exception e){&#xa;e.printStackTrace();&#xa;}">
+          <Connection code="&quot;&lt;html&gt;&lt;b&gt;&quot;+projectName+&quot; v&quot;+version+&quot;&lt;/b&gt;&lt;br&gt;&lt;br&gt;&quot;&#xa;    + &quot;DocGen is a Word/PDF generating application.&quot;&#xa;    + &quot;&lt;br&gt;Specifically designed for generating PDF and &quot;&#xa;    + &quot;&lt;br&gt;Doc Files from images.&quot;&#xa;    " type="code"/>
         </Property>
       </Properties>
     </Component>

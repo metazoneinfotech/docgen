@@ -2,9 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.mz</groupId>
-    <artifactId>DocGen</artifactId>
+    <artifactId>docgen</artifactId>
     <version>1.0.1</version>
     <packaging>jar</packaging>
+    <name>DocGen</name>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -36,38 +37,8 @@
 
     <properties>
         
-         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
     </properties>
-    
-    
-<build>
-     <resources>
-                <resource>
-                   
-                        <filtering>true</filtering>
-                        <directory>src/main/resources</directory>
-                 </resource>
-     </resources>
-    <plugins>
-        <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>properties-maven-plugin</artifactId>
-            <version>1.0-alpha-2</version>
-            
-            <executions>
-                <execution>
-                    <phase>generate-resources</phase>
-                    <goals>
-                        <goal>write-project-properties</goal>
-                    </goals>
-                    <configuration>
-                        <outputFile>${project.build.outputDirectory}/my.properties</outputFile>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
-    </plugins>
-</build>
 </project>

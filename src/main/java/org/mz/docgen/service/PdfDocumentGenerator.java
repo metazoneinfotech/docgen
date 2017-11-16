@@ -30,13 +30,18 @@ import org.apache.log4j.Logger;
 import org.mz.docgen.constant.Constant;
 
 /**
- *
+ * This class generates the pdf file from selected file.
  * @author Payal
  */
 public class PdfDocumentGenerator implements DocumentGenerator {
 
     private static final Logger LOGGER = LogManager.getLogger(PdfDocumentGenerator.class.getName());
-
+    /**
+     * This method generates pdf file of a single document.
+     * @param files
+     * @param destination
+     * @return result
+     */
     @Override
     public int generateSingleDocument(File[] files, File destination) {
         File pdf = new File(destination, files[0].getName() + ".pdf");
@@ -56,7 +61,7 @@ public class PdfDocumentGenerator implements DocumentGenerator {
                     pdfDoc.newPage();
                 }
             }
-            LOGGER.info("files generated");
+            LOGGER.info("single pdf file generated");
             return 1;
         } catch (DocumentException | IOException ex) {
             LOGGER.error(ex.getMessage(), ex);
@@ -65,7 +70,12 @@ public class PdfDocumentGenerator implements DocumentGenerator {
         }
         return 0;
     }
-
+/**
+ *  This method generates pdf file of multiple document.
+ * @param files
+ * @param destinationFilePath
+ * @return result
+ */
     @Override
     public int generateMultipleDocument(File[] files, File destinationFilePath) {
         int result = 1;
@@ -75,7 +85,7 @@ public class PdfDocumentGenerator implements DocumentGenerator {
             result = result & generateSingleDocument(singleFileArray, destinationFilePath);
 
         }
-        LOGGER.info("multiple Files generated");
+        LOGGER.info("multiple pdf Files generated");
         return result;
     }
 }

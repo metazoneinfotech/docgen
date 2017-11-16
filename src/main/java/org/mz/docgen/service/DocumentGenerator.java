@@ -17,14 +17,29 @@
 package org.mz.docgen.service;
 
 import java.io.File;
-
 /**
- *
+ * This interface is used to take the File type array and also its path of single
+ * and multiple files.All methods of this interface is abstract so that it can be
+ * override by implementor class
  * @author Payal
  */
 public interface DocumentGenerator {
-
+    /**
+     * This method is used to take a single File through File type array selected
+     * by user.Function of this method is to take File type array along with their
+     * path which is selected by the user.
+     * @param files
+     * @param destinationFilePath
+     * @return int
+     */
     int generateSingleDocument(File[] files, File destinationFilePath);
-
+    /**
+     * This method is used to take a multiple File through File type array selected
+     * by user.Function of this method is to take File type array along with their
+     * path which is selected by the user.
+     * @param files
+     * @param destinationFilePath
+     * @return int
+     */
     int generateMultipleDocument(File[] files, File destinationFilePath);
 }
