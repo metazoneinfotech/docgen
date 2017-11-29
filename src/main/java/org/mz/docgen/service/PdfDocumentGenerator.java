@@ -36,6 +36,7 @@ import org.mz.docgen.constant.Constant;
 public class PdfDocumentGenerator implements DocumentGenerator {
 
     private static final Logger LOGGER = LogManager.getLogger(PdfDocumentGenerator.class.getName());
+    
     /**
      * This method generates pdf file of a single document.
      * @param files
@@ -46,12 +47,15 @@ public class PdfDocumentGenerator implements DocumentGenerator {
     public int generateSingleDocument(File[] files, File destination) {
         File pdf = new File(destination, files[0].getName() + ".pdf");
         Document pdfDoc = new Document();
+        FileOutputStream fos = null;
+        int invalidFilesCount=0;
         try {
-            PdfWriter.getInstance(pdfDoc, new FileOutputStream(pdf));
+            fos = new FileOutputStream(pdf);
+            PdfWriter.getInstance(pdfDoc, fos);
             pdfDoc.open();
             Image image;
-            for (File file : files) {
-                if (file.exists()) {
+            for (File file : files) { 
+                 if (file.exists()) {
                     image = Image.getInstance(file.getAbsolutePath());
                     image.scaleToFit(Constant.CLASS_PDF_SCALE_TO_FIT_WIDTH, Constant.CLASS_PDF_SCALE_TO_FIT_HEIGHT);
                     image.setAbsolutePosition(Constant.CLASS_PDF_ABS_POSITION_FIRST, PageSize.A4.getHeight() - image.getScaledHeight() - Constant.CLASS_PDF_ABS_POSITION_SECOND);
@@ -59,33 +63,47 @@ public class PdfDocumentGenerator implements DocumentGenerator {
                     image.scaleAbsoluteWidth(Constant.CLASS_PDF_ABS_HEIGHT);
                     pdfDoc.add((Element) image);
                     pdfDoc.newPage();
+                } else{
+                    invalidFilesCount++;
                 }
             }
-            LOGGER.info("single pdf file generated");
-            return 1;
+          return 1;
         } catch (DocumentException | IOException ex) {
             LOGGER.error(ex.getMessage(), ex);
         } finally {
-            pdfDoc.close();
+             try {
+               if(invalidFilesCount!=files.length){
+                    pdfDoc.close();
+                }
+                if (fos != null) {
+                    fos.close();
+                }
+            } catch (IOException ex) {
+                LOGGER.error(ex.getMessage(), ex);
+            }
         }
         return 0;
     }
-/**
- *  This method generates pdf file of multiple document.
- * @param files
- * @param destinationFilePath
- * @return result
- */
+
+    /**
+     * This method generates pdf file of multiple document.
+     * @param files
+     * @param destinationFilePath
+     * @return result
+     */
     @Override
     public int generateMultipleDocument(File[] files, File destinationFilePath) {
-        int result = 1;
+        int result = 0;
         File[] singleFileArray = new File[1];
         for (File file : files) {
             singleFileArray[0] = file;
-            result = result & generateSingleDocument(singleFileArray, destinationFilePath);
-
+            result = result + generateSingleDocument(singleFileArray, destinationFilePath);
         }
-        LOGGER.info("multiple pdf Files generated");
-        return result;
+        if(result!=0){
+            LOGGER.info("multiple pdf Files generated");
+           return 1;
+        } else{
+          return 0;
+        } 
     }
 }

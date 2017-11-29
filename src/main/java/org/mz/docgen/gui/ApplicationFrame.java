@@ -257,7 +257,7 @@ public class ApplicationFrame extends javax.swing.JFrame {
         LOGGER.info("AboutButton clicked");
         new AboutFrame().setVisible(true);
     }
-    
+   
     /**
      * This method is used to take user's choice to convert files into either pdf 
      * file or docx file.
@@ -285,8 +285,10 @@ public class ApplicationFrame extends javax.swing.JFrame {
         }
         if (result == 1) {
             JOptionPane.showMessageDialog(this, "Document Successfully Created!");
+            LOGGER.info("Document successfully created");
         } else {
             JOptionPane.showMessageDialog(this, "Error!  while Creating Document!");
+            LOGGER.info("Error! in creating Document");
         }
     }//GEN-LAST:event_generateBtnAction
     
