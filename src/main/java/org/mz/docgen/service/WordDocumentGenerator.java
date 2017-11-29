@@ -43,13 +43,18 @@ public class WordDocumentGenerator implements DocumentGenerator {
         FileOutputStream fos = null;
         File wordDoc = new File(destination, files[0].getName() + ".docx");
         CustomXWPFDocument document = new CustomXWPFDocument();
+        int invalidFilesCount=0;
         try {
             String picId;
             fos = new FileOutputStream(wordDoc);
             for (File file : files) {
+                if (file.exists()) {
                 picId = document.addPictureData(new FileInputStream(new File(file.getAbsolutePath())), org.apache.poi.xwpf.usermodel.Document.PICTURE_TYPE_JPEG);
                 document.createPicture(picId, document.getNextPicNameNumber(org.apache.poi.xwpf.usermodel.Document.PICTURE_TYPE_JPEG), Constant.CLASS_WORD_IMG_WIDTH_WORD_DOCUMENT, Constant.CLASS_WORD_IMG_HEIGHT_WORD_DOCUMENT);
-            }
+                }else{
+                    invalidFilesCount++;
+                }
+            }  
             document.write(fos);
             LOGGER.info("single WordDocument generated");
             return 1;
@@ -57,9 +62,9 @@ public class WordDocumentGenerator implements DocumentGenerator {
             LOGGER.error(ex.getMessage(), ex);
         } finally {
             try {
+                
                 document.close();
                 if (fos != null) {
-                    
                     fos.close();
                 }
             } catch (IOException ex) {
