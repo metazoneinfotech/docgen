@@ -67,6 +67,7 @@ public class PdfDocumentGenerator implements DocumentGenerator {
                     invalidFilesCount++;
                 }
             }
+           LOGGER.info("single pdf file generated");
           return 1;
         } catch (DocumentException | IOException ex) {
             LOGGER.error(ex.getMessage(), ex);
